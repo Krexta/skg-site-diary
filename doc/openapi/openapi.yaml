@@ -1,0 +1,37 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /graphiql:
+    get:
+      operationId: AppController_graphiql
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /diaryql:
+    post:
+      operationId: AppController_graphql
+      parameters: []
+      responses:
+        '201':
+          description: ''
+info:
+  title: SKG Site Diary API
+  description: SKG 現場記録API
+  version: 0.1.0
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas: {}
