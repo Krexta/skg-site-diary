@@ -1,0 +1,62 @@
+# cSpell:word vitest
+name: Test
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+# 同ブランチのテストは重複させない
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref.branches }}
+  cancel-in-progress: true
+
+env:
+  DATABASE_URL: postgresql://test:postgres@localhost:5432/Test_Employee?schema=test
+
+jobs:
+  vitest:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: 'test'
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        shell: bash
+        run: npm install -g pnpm && pnpm install
+      - name: Run Test DB Migration
+        shell: bash
+        run: pnpm run db:deploy
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+          DATABASE_URL_TEST: ${{ env.DATABASE_URL }}
+      - name: Run Linter
+        shell: bash
+        run: pnpm run lint
+      - name: Run Formatter
+        shell: bash
+        run: pnpm run format --check
+      - name: Run vitest
+        shell: bash
+        run: pnpm run test:cov --silent --reporter=verbose
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+          DATABASE_URL_TEST: ${{ env.DATABASE_URL }}
+      - name: Show coverage
+        uses: davelosert/vitest-coverage-report-action@v2
