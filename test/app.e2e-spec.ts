@@ -35,4 +35,24 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  describe('/diaryql (POST)', () => {
+    it.todo('認証が無い場合はエラーを返す');
+    it('GraphQLのエンドポイントにアクセスできる', () => {
+      // TODO: 認証の実装が必要なため、認証実装後、テスト内容を修正する。
+      return request(app.getHttpServer())
+        .post('/diaryql')
+        .send({
+          query: `query {
+            nodeId
+          }`,
+        })
+        .expect(200)
+        .expect({
+          data: {
+            nodeId: 'query',
+          },
+        });
+    });
+  });
 });

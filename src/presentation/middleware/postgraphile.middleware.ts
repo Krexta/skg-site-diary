@@ -1,13 +1,27 @@
 // cSpell:word graphile inflector errcode graphiql setof diaryql
 import PgSimplifyInflectorPlugin from '@graphile-contrib/pg-simplify-inflector';
+import { PgEntityKind } from 'graphile-build-pg';
+import { makePgSmartTagsPlugin } from 'graphile-utils/node8plus/makePgSmartTagsPlugin.js';
 import { postgraphile } from 'postgraphile';
-import { makePgSmartTagsFromFilePlugin } from 'postgraphile/plugins.js';
 
 import { AppConfig } from 'src/utility';
 
-const SmartTagsPlugin = makePgSmartTagsFromFilePlugin(
-  'src/../postgraphile.tags.json',
-);
+const SmartTagsPlugin = makePgSmartTagsPlugin([
+  {
+    kind: PgEntityKind.CLASS,
+    match: '_prisma_migrations',
+    tags: {
+      omit: 'read,update,create,delete,all,many',
+    },
+  },
+  {
+    kind: PgEntityKind.CLASS,
+    match: 'Event',
+    tags: {
+      omit: 'read,update,create,delete,all,many',
+    },
+  },
+]);
 
 const development_options = {
   subscriptions: true,

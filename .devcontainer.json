@@ -14,7 +14,8 @@
           "openapi",
           "nestjs",
           "postgraphile",
-          "graphile"
+          "graphile",
+          "graphiql"
         ],
         "cSpell.ignorePaths": [
           "vscode-extension",
