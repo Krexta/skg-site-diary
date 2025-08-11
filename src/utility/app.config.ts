@@ -28,14 +28,8 @@ export class AppConfig {
   }
   static switchGraphileConfig<T, U>(development: T, production: U): T | U {
     const env = AppConfig.env;
-    switch (env) {
-      case 'local':
-        return development;
-      case 'dev':
-      case 'development':
-        return production;
-      case 'production':
-        return production;
+    if (env && ['development', 'dev', 'production'].includes(env)) {
+      return production;
     }
 
     return development;

@@ -4,7 +4,7 @@ import { PostGraphileResponseNode } from 'postgraphile';
 
 import { AppScenario } from '../application/scenario/app.scenario';
 
-import { middleware } from './middleware/postgraphile.middleware';
+import { middleware } from './middleware';
 
 import type { Request, Response } from 'express';
 
