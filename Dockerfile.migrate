@@ -3,7 +3,10 @@
 # ==============================================================================
 FROM node:20.18-slim AS base
 
-RUN npm i -g pnpm
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libssl3 wget ca-certificates procps && \
+    npm install -g pnpm && \
+    rm -rf /var/lib/apt/lists/*
 
 # ==============================================================================
 # 2. Dependencies Stage
@@ -15,25 +18,16 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # ==============================================================================
-# 3. Build Stage
+# 3. Migration Stage
 # ==============================================================================
-FROM base AS build
-
-WORKDIR /build
-COPY . .
-COPY --from=dependencies /dependencies/node_modules ./node_modules
-RUN pnpm build
-RUN pnpm prune --prod
-
-# ==============================================================================
-# 4. Final Stage
-# ==============================================================================
-FROM gcr.io/distroless/nodejs20-debian12 AS runner
+FROM base AS runner
 
 WORKDIR /server
-COPY --from=build /build/dist ./dist
-COPY --from=build /build/doc ./doc
-COPY --from=build /build/node_modules ./node_modules
-COPY --from=build /build/package.json ./package.json
+RUN rm -rf ./node_modules
+COPY --from=dependencies /dependencies/node_modules ./node_modules
+COPY --from=dependencies /dependencies/package.json ./package.json
 
-CMD [ "dist/main.js" ]
+COPY prisma/ ./prisma/
+RUN pnpm db:generate
+
+CMD [ "pnpm", "db:deploy" ]

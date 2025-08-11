@@ -17,9 +17,8 @@ services:
   server:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       network: host
-      target: development
     working_dir: /server
     volumes:
       - .:/server
@@ -33,6 +32,11 @@ services:
     environment:
       DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is not found}
       DATABASE_URL_TEST: ${DATABASE_URL_TEST:?DATABASE_URL_TEST is not found}
+    command: >
+      sh -c "
+      pnpm db:generate && pnpm db:deploy &&
+      pnpm run start:dev
+      "
     tty: true
 volumes:
   dot-pnpm-store:
