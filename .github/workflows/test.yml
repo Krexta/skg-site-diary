@@ -2,9 +2,9 @@
 name: Test
 on:
   push:
-    branches: [main, develop]
+    branches: [main, stage, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [main, stage, develop]
 
 # 同ブランチのテストは重複させない
 concurrency:
@@ -34,29 +34,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        shell: bash
-        run: npm install -g pnpm && pnpm install
-      - name: Run Test DB Migration
-        shell: bash
-        run: pnpm run db:deploy
-        env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
-          DATABASE_URL_TEST: ${{ env.DATABASE_URL }}
-      - name: Run Linter
-        shell: bash
-        run: pnpm run lint
-      - name: Run Formatter
-        shell: bash
-        run: pnpm run format --check
-      - name: Run vitest
-        shell: bash
-        run: pnpm run test:cov --silent --reporter=verbose
-        env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
-          DATABASE_URL_TEST: ${{ env.DATABASE_URL }}
-      - name: Show coverage
-        uses: davelosert/vitest-coverage-report-action@v2
+      - name: run-lint-test
+        uses: ./.github/actions/lint
+      - name: run-vitest
+        uses: ./.github/actions/vitest

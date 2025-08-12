@@ -1,0 +1,166 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main, stage, develop]
+  workflow_dispatch:
+    inputs:
+      rebuild-backend:
+        # github.event.inputs.rebuild-backend
+        type: boolean
+        description: Rebuild & Re-Deploy backend container (incl. migration)?
+        default: false
+
+env:
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_REGION: ${{ secrets.GCP_REGION }}
+  GCP_GAR_REPOSITORY: ${{ secrets.GCP_GAR_REPOSITORY }}
+  GCP_SERVICE: ${{ secrets.GCP_SERVICE }}
+  GCP_SERVICE_MIGRATION: ${{ secrets.GCP_SERVICE_MIGRATION }}
+  DOCKERFILE_NAME: Dockerfile
+  DOCKERFILE_MIGRATION_NAME: Dockerfile.migrate
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
+  actions: read
+
+jobs:
+  setup-environment:
+    name: 'Setup environment 💻'
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 3
+    outputs:
+      env_target: ${{ steps.set-env.outputs.env_target }}
+    steps:
+      - id: set-env
+        shell: bash
+        run: |
+          case ${{ github.ref_name }} in
+            "develop")
+              echo "env_target=develop" >> $GITHUB_OUTPUT
+              ;;
+            "stage")
+              echo "env_target=stage" >> $GITHUB_OUTPUT
+              ;;
+            "main")
+              echo "env_target=main" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "env_target=develop" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
+      - id: check-env
+        shell: bash
+        run: |
+          echo "Running under ${{ steps.set-env.outputs.env_target }}"
+          echo "Deploy ${{ github.ref_name }}"
+  build-and-push:
+    name: 'Build and push 🏗️'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [setup-environment]
+    environment:
+      name: ${{ needs.setup-environment.outputs.env_target }}
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Authenticate to Google Cloud'
+        id: auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT_NAME }}'
+
+      - name: 'Docker login to artifact registry'
+        id: docker-auth
+        uses: 'docker/login-action@v1'
+        with:
+          username: 'oauth2accesstoken'
+          password: '${{ steps.auth.outputs.access_token }}'
+          registry: '${{ env.GCP_REGION }}-docker.pkg.dev'
+
+      - name: 'Build and Push backend'
+        run: |-
+          docker build -f ./${{ env.DOCKERFILE_NAME }} -t "${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_GAR_REPOSITORY }}/${{ env.GCP_SERVICE }}:${{ github.sha }}" ./
+          docker push "${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_GAR_REPOSITORY }}/${{ env.GCP_SERVICE }}:${{ github.sha }}"
+
+      - name: 'Build and Push migration'
+        run: |-
+          docker build -f ./${{ env.DOCKERFILE_MIGRATION_NAME }} -t "${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_GAR_REPOSITORY }}/${{ env.GCP_SERVICE_MIGRATION }}:${{ github.sha }}" ./
+          docker push "${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_GAR_REPOSITORY }}/${{ env.GCP_SERVICE_MIGRATION }}:${{ github.sha }}"
+
+  deploy-migration:
+    name: 'Deploy migration to Cloud run 🚀'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [setup-environment, build-and-push]
+    environment:
+      name: ${{ needs.setup-environment.outputs.env_target }}
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Authenticate to Google Cloud'
+        id: auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT_NAME }}'
+
+      - name: 'Deploy migration to Google Cloud'
+        run: |
+          gcloud run jobs update ${{ env.GCP_GAR_REPOSITORY }}-${{ env.GCP_SERVICE_MIGRATION }} \
+            --region=${{ env.GCP_REGION }} \
+            --project=${{ env.GCP_PROJECT_ID }} \
+            --image=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_GAR_REPOSITORY }}/${{ env.GCP_SERVICE_MIGRATION }}:${{ github.sha }} \
+            --set-env-vars NODE_ENV=${{ vars.NODE_ENV }} \
+            --set-secrets DATABASE_URL=${{ secrets.DATABASE_URL }}:latest
+
+      - name: 'Run Cloud Run Job'
+        run: |
+          gcloud run jobs execute ${{ env.GCP_GAR_REPOSITORY }}-${{ env.GCP_SERVICE_MIGRATION }} --region=${{ env.GCP_REGION }} --project=${{ env.GCP_PROJECT_ID }}
+
+      - name: 'Show Job Details'
+        run: echo "Job ${{ env.GCP_GAR_REPOSITORY }}-${{ env.GCP_SERVICE_MIGRATION }} deployed and executed on Cloud Run."
+
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
+
+  deploy-backend:
+    name: 'Deploy backend to Cloud run 🚀'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [setup-environment, build-and-push, deploy-migration]
+    environment:
+      name: ${{ needs.setup-environment.outputs.env_target }}
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Authenticate to Google Cloud'
+        id: auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT_NAME }}'
+
+      - name: 'Deploy backend to Google Cloud'
+        id: deploy-backend
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.GCP_GAR_REPOSITORY }}-${{ env.GCP_SERVICE }}
+          region: ${{ env.GCP_REGION }}
+          image: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_GAR_REPOSITORY }}/${{ env.GCP_SERVICE }}:${{ github.sha }}
+          env_vars: |
+            NODE_ENV=${{ vars.NODE_ENV }}
+          secrets: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}:latest
+
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
