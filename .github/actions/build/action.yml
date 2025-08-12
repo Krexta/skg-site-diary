@@ -1,0 +1,32 @@
+name: run-build
+description: Run build
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install PNPM
+      shell: bash
+      run: npm install -g pnpm
+    - name: Use Cache
+      uses: actions/cache@v4
+      id: node_modules_cache_id
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: |
+          **/node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+    - shell: bash
+      run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+    - shell: bash
+      if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+      run: pnpm install
+    - name: Run build
+      shell: bash
+      run: pnpm build

@@ -1,0 +1,21 @@
+name: Build
+on:
+  push:
+    branches: [main, stage, develop]
+  pull_request:
+    branches: [main, stage, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref.branches }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    timeout-minutes: 60
+    if: (github.ref_name == 'develop' || github.ref_name == 'stage' || github.ref_name == 'main')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: run-build
+        uses: ./.github/actions/build
