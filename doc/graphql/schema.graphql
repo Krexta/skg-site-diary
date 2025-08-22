@@ -17,8 +17,8 @@ type Query implements Node {
     nodeId: ID!
   ): Node
 
-  """Reads and enables pagination through a set of `Diary`."""
-  diaries(
+  """Reads and enables pagination through a set of `FormAttachedFile`."""
+  formAttachedFiles(
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -37,21 +37,419 @@ type Query implements Node {
     """Read all values in the set after (below) this cursor."""
     after: Cursor
 
-    """The method to use when ordering `Diary`."""
-    orderBy: [DiariesOrderBy!] = [PRIMARY_KEY_ASC]
+    """The method to use when ordering `FormAttachedFile`."""
+    orderBy: [FormAttachedFilesOrderBy!] = [PRIMARY_KEY_ASC]
 
     """
     A condition to be used in determining which values should be returned by the collection.
     """
-    condition: DiaryCondition
-  ): DiariesConnection
-  diary(id: String!): Diary
+    condition: FormAttachedFileCondition
+  ): FormAttachedFilesConnection
 
-  """Reads a single `Diary` using its globally unique `ID`."""
-  diaryByNodeId(
-    """The globally unique `ID` to be used in selecting a single `Diary`."""
+  """Reads and enables pagination through a set of `ProgressCheckReport`."""
+  progressCheckReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProgressCheckReport`."""
+    orderBy: [ProgressCheckReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProgressCheckReportCondition
+  ): ProgressCheckReportsConnection
+
+  """
+  Reads and enables pagination through a set of `ProgressCheckReportedWorker`.
+  """
+  progressCheckReportedWorkers(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProgressCheckReportedWorker`."""
+    orderBy: [ProgressCheckReportedWorkersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProgressCheckReportedWorkerCondition
+  ): ProgressCheckReportedWorkersConnection
+
+  """Reads and enables pagination through a set of `ProjectBudgetChange`."""
+  projectBudgetChanges(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectBudgetChange`."""
+    orderBy: [ProjectBudgetChangesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectBudgetChangeCondition
+  ): ProjectBudgetChangesConnection
+
+  """Reads and enables pagination through a set of `ProjectCloseReport`."""
+  projectCloseReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectCloseReport`."""
+    orderBy: [ProjectCloseReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectCloseReportCondition
+  ): ProjectCloseReportsConnection
+
+  """Reads and enables pagination through a set of `ProjectCommonReport`."""
+  projectCommonReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectCommonReport`."""
+    orderBy: [ProjectCommonReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectCommonReportCondition
+  ): ProjectCommonReportsConnection
+
+  """Reads and enables pagination through a set of `ProjectMeetingReport`."""
+  projectMeetingReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectMeetingReport`."""
+    orderBy: [ProjectMeetingReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectMeetingReportCondition
+  ): ProjectMeetingReportsConnection
+
+  """Reads and enables pagination through a set of `ProjectReport`."""
+  projectReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectReport`."""
+    orderBy: [ProjectReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectReportCondition
+  ): ProjectReportsConnection
+
+  """
+  Reads and enables pagination through a set of `ProjectStatusUpdateReport`.
+  """
+  projectStatusUpdateReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectStatusUpdateReport`."""
+    orderBy: [ProjectStatusUpdateReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectStatusUpdateReportCondition
+  ): ProjectStatusUpdateReportsConnection
+
+  """Reads and enables pagination through a set of `ProjectWorkerReport`."""
+  projectWorkerReports(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProjectWorkerReport`."""
+    orderBy: [ProjectWorkerReportsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProjectWorkerReportCondition
+  ): ProjectWorkerReportsConnection
+
+  """Reads and enables pagination through a set of `ReportedWorker`."""
+  reportedWorkers(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ReportedWorker`."""
+    orderBy: [ReportedWorkersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ReportedWorkerCondition
+  ): ReportedWorkersConnection
+  formAttachedFile(formAttachedFileId: UUID!): FormAttachedFile
+  progressCheckReport(progressCheckReportId: UUID!): ProgressCheckReport
+  progressCheckReportByProjectReportId(projectReportId: UUID!): ProgressCheckReport
+  progressCheckReportedWorker(progressCheckReportedWorkerId: UUID!): ProgressCheckReportedWorker
+  progressCheckReportedWorkerByWorkerIdAndProgressCheckReportId(workerId: UUID!, progressCheckReportId: UUID!): ProgressCheckReportedWorker
+  projectBudgetChange(projectBudgetId: UUID!): ProjectBudgetChange
+  projectBudgetChangeByProjectReportId(projectReportId: UUID!): ProjectBudgetChange
+  projectCloseReport(projectCloseReportId: UUID!): ProjectCloseReport
+  projectCloseReportByProjectReportId(projectReportId: UUID!): ProjectCloseReport
+  projectCommonReport(projectCommonReportId: UUID!): ProjectCommonReport
+  projectCommonReportByProjectReportId(projectReportId: UUID!): ProjectCommonReport
+  projectMeetingReport(projectMeetingReportId: UUID!): ProjectMeetingReport
+  projectMeetingReportByProjectReportId(projectReportId: UUID!): ProjectMeetingReport
+  projectReport(projectReportId: UUID!): ProjectReport
+  projectStatusUpdateReport(projectStatusUpdateReportId: UUID!): ProjectStatusUpdateReport
+  projectStatusUpdateReportByProjectReportId(projectReportId: UUID!): ProjectStatusUpdateReport
+  projectWorkerReport(projectWorkerReportId: UUID!): ProjectWorkerReport
+  projectWorkerReportByProjectReportId(projectReportId: UUID!): ProjectWorkerReport
+  reportedWorker(reportedWorkersId: UUID!): ReportedWorker
+
+  """Reads a single `FormAttachedFile` using its globally unique `ID`."""
+  formAttachedFileByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `FormAttachedFile`.
+    """
     nodeId: ID!
-  ): Diary
+  ): FormAttachedFile
+
+  """Reads a single `ProgressCheckReport` using its globally unique `ID`."""
+  progressCheckReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProgressCheckReport`.
+    """
+    nodeId: ID!
+  ): ProgressCheckReport
+
+  """
+  Reads a single `ProgressCheckReportedWorker` using its globally unique `ID`.
+  """
+  progressCheckReportedWorkerByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProgressCheckReportedWorker`.
+    """
+    nodeId: ID!
+  ): ProgressCheckReportedWorker
+
+  """Reads a single `ProjectBudgetChange` using its globally unique `ID`."""
+  projectBudgetChangeByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectBudgetChange`.
+    """
+    nodeId: ID!
+  ): ProjectBudgetChange
+
+  """Reads a single `ProjectCloseReport` using its globally unique `ID`."""
+  projectCloseReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectCloseReport`.
+    """
+    nodeId: ID!
+  ): ProjectCloseReport
+
+  """Reads a single `ProjectCommonReport` using its globally unique `ID`."""
+  projectCommonReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectCommonReport`.
+    """
+    nodeId: ID!
+  ): ProjectCommonReport
+
+  """Reads a single `ProjectMeetingReport` using its globally unique `ID`."""
+  projectMeetingReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectMeetingReport`.
+    """
+    nodeId: ID!
+  ): ProjectMeetingReport
+
+  """Reads a single `ProjectReport` using its globally unique `ID`."""
+  projectReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectReport`.
+    """
+    nodeId: ID!
+  ): ProjectReport
+
+  """
+  Reads a single `ProjectStatusUpdateReport` using its globally unique `ID`.
+  """
+  projectStatusUpdateReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectStatusUpdateReport`.
+    """
+    nodeId: ID!
+  ): ProjectStatusUpdateReport
+
+  """Reads a single `ProjectWorkerReport` using its globally unique `ID`."""
+  projectWorkerReportByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ProjectWorkerReport`.
+    """
+    nodeId: ID!
+  ): ProjectWorkerReport
+
+  """Reads a single `ReportedWorker` using its globally unique `ID`."""
+  reportedWorkerByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `ReportedWorker`.
+    """
+    nodeId: ID!
+  ): ReportedWorker
 }
 
 """An object with a globally unique `ID`."""
@@ -62,42 +460,303 @@ interface Node {
   nodeId: ID!
 }
 
-"""A connection to a list of `Diary` values."""
-type DiariesConnection {
-  """A list of `Diary` objects."""
-  nodes: [Diary!]!
+"""A connection to a list of `FormAttachedFile` values."""
+type FormAttachedFilesConnection {
+  """A list of `FormAttachedFile` objects."""
+  nodes: [FormAttachedFile!]!
 
   """
-  A list of edges which contains the `Diary` and cursor to aid in pagination.
+  A list of edges which contains the `FormAttachedFile` and cursor to aid in pagination.
   """
-  edges: [DiariesEdge!]!
+  edges: [FormAttachedFilesEdge!]!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  """The count of *all* `Diary` you could get from the connection."""
+  """
+  The count of *all* `FormAttachedFile` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-type Diary implements Node {
+type FormAttachedFile implements Node {
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
   """
   nodeId: ID!
-  id: String!
+  formAttachedFileId: UUID!
+  projectReportId: UUID!
+  fileName: String!
+  filePath: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+
+  """アップロードしたユーザーID"""
+  uploadUserId: UUID!
+
+  """
+  Reads a single `ProjectReport` that is related to this `FormAttachedFile`.
+  """
+  projectReport: ProjectReport
 }
 
-"""A `Diary` edge in the connection."""
-type DiariesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
+"""
+A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/html/rfc4122).
+"""
+scalar UUID
 
-  """The `Diary` at the end of the edge."""
-  node: Diary!
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+type ProjectReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  projectReportId: UUID!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+
+  """追加したユーザーID"""
+  createUserId: UUID!
+
+  """報告日時"""
+  reportDate: Date!
+  projectId: UUID!
+
+  """Reads and enables pagination through a set of `FormAttachedFile`."""
+  formAttachedFiles(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `FormAttachedFile`."""
+    orderBy: [FormAttachedFilesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: FormAttachedFileCondition
+  ): FormAttachedFilesConnection!
+
+  """
+  Reads a single `ProgressCheckReport` that is related to this `ProjectReport`.
+  """
+  progressCheckReport: ProgressCheckReport
+
+  """
+  Reads a single `ProjectCloseReport` that is related to this `ProjectReport`.
+  """
+  projectCloseReport: ProjectCloseReport
+
+  """
+  Reads a single `ProjectStatusUpdateReport` that is related to this `ProjectReport`.
+  """
+  projectStatusUpdateReport: ProjectStatusUpdateReport
+
+  """
+  Reads a single `ProjectBudgetChange` that is related to this `ProjectReport`.
+  """
+  projectBudgetChange: ProjectBudgetChange
+
+  """
+  Reads a single `ProjectWorkerReport` that is related to this `ProjectReport`.
+  """
+  projectWorkerReport: ProjectWorkerReport
+
+  """
+  Reads a single `ProjectCommonReport` that is related to this `ProjectReport`.
+  """
+  projectCommonReport: ProjectCommonReport
+
+  """
+  Reads a single `ProjectMeetingReport` that is related to this `ProjectReport`.
+  """
+  projectMeetingReport: ProjectMeetingReport
 }
+
+"""The day, does not include a time."""
+scalar Date
 
 """A location in a connection that can be used for resuming pagination."""
 scalar Cursor
+
+"""Methods to use when ordering `FormAttachedFile`."""
+enum FormAttachedFilesOrderBy {
+  NATURAL
+  FORM_ATTACHED_FILE_ID_ASC
+  FORM_ATTACHED_FILE_ID_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  FILE_NAME_ASC
+  FILE_NAME_DESC
+  FILE_PATH_ASC
+  FILE_PATH_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  UPLOAD_USER_ID_ASC
+  UPLOAD_USER_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `FormAttachedFile` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input FormAttachedFileCondition {
+  """Checks for equality with the object’s `formAttachedFileId` field."""
+  formAttachedFileId: UUID
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `fileName` field."""
+  fileName: String
+
+  """Checks for equality with the object’s `filePath` field."""
+  filePath: String
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `uploadUserId` field."""
+  uploadUserId: UUID
+}
+
+type ProgressCheckReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  progressCheckReportId: UUID!
+  projectReportId: UUID!
+
+  """実行予算単位ID"""
+  executionBudgetUnitId: UUID!
+  progressReportData: JSON!
+
+  """評価進捗"""
+  totalPerformancePercentage: BigFloat!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  consumedWorkersPercentage: BigFloat!
+  title: String
+  reportText: String
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProgressCheckReport`.
+  """
+  projectReport: ProjectReport
+
+  """
+  Reads and enables pagination through a set of `ProgressCheckReportedWorker`.
+  """
+  progressCheckReportedWorkers(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ProgressCheckReportedWorker`."""
+    orderBy: [ProgressCheckReportedWorkersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProgressCheckReportedWorkerCondition
+  ): ProgressCheckReportedWorkersConnection!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+A floating point number that requires more precision than IEEE 754 binary 64
+"""
+scalar BigFloat
+
+"""A connection to a list of `ProgressCheckReportedWorker` values."""
+type ProgressCheckReportedWorkersConnection {
+  """A list of `ProgressCheckReportedWorker` objects."""
+  nodes: [ProgressCheckReportedWorker!]!
+
+  """
+  A list of edges which contains the `ProgressCheckReportedWorker` and cursor to aid in pagination.
+  """
+  edges: [ProgressCheckReportedWorkersEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProgressCheckReportedWorker` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type ProgressCheckReportedWorker implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  progressCheckReportedWorkerId: UUID!
+  progressCheckReportId: UUID!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  workerId: UUID!
+
+  """
+  Reads a single `ProgressCheckReport` that is related to this `ProgressCheckReportedWorker`.
+  """
+  progressCheckReport: ProgressCheckReport
+}
+
+"""A `ProgressCheckReportedWorker` edge in the connection."""
+type ProgressCheckReportedWorkersEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProgressCheckReportedWorker` at the end of the edge."""
+  node: ProgressCheckReportedWorker!
+}
 
 """Information about pagination in a connection."""
 type PageInfo {
@@ -114,19 +773,894 @@ type PageInfo {
   endCursor: Cursor
 }
 
-"""Methods to use when ordering `Diary`."""
-enum DiariesOrderBy {
+"""Methods to use when ordering `ProgressCheckReportedWorker`."""
+enum ProgressCheckReportedWorkersOrderBy {
   NATURAL
-  ID_ASC
-  ID_DESC
+  PROGRESS_CHECK_REPORTED_WORKER_ID_ASC
+  PROGRESS_CHECK_REPORTED_WORKER_ID_DESC
+  PROGRESS_CHECK_REPORT_ID_ASC
+  PROGRESS_CHECK_REPORT_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  WORKER_ID_ASC
+  WORKER_ID_DESC
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
 }
 
 """
-A condition to be used against `Diary` object types. All fields are tested for equality and combined with a logical ‘and.’
+A condition to be used against `ProgressCheckReportedWorker` object types. All
+fields are tested for equality and combined with a logical ‘and.’
 """
-input DiaryCondition {
-  """Checks for equality with the object’s `id` field."""
-  id: String
+input ProgressCheckReportedWorkerCondition {
+  """
+  Checks for equality with the object’s `progressCheckReportedWorkerId` field.
+  """
+  progressCheckReportedWorkerId: UUID
+
+  """Checks for equality with the object’s `progressCheckReportId` field."""
+  progressCheckReportId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `workerId` field."""
+  workerId: UUID
+}
+
+type ProjectCloseReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  projectCloseReportId: UUID!
+  closeReportChecklist: JSON!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  projectReportId: UUID!
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProjectCloseReport`.
+  """
+  projectReport: ProjectReport
+}
+
+type ProjectStatusUpdateReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  projectStatusUpdateReportId: UUID!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+
+  """追加したユーザーID"""
+  createUserId: UUID!
+  projectReportId: UUID!
+
+  """プロジェクトステータスid"""
+  projectStatusId: UUID!
+  title: String
+  reportText: String
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProjectStatusUpdateReport`.
+  """
+  projectReport: ProjectReport
+}
+
+"""契約外工事記録テーブル"""
+type ProjectBudgetChange implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  projectBudgetId: UUID!
+  changeReasonCode: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  projectReportId: UUID!
+
+  """顧客ID"""
+  billingClientId: UUID!
+  title: String
+  reportText: String
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProjectBudgetChange`.
+  """
+  projectReport: ProjectReport
+}
+
+type ProjectWorkerReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """プロジェクト職班レポートID"""
+  projectWorkerReportId: UUID!
+  reportTypeCode: String
+  title: String
+  reportText: String
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  projectReportId: UUID!
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProjectWorkerReport`.
+  """
+  projectReport: ProjectReport
+
+  """Reads and enables pagination through a set of `ReportedWorker`."""
+  reportedWorkers(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ReportedWorker`."""
+    orderBy: [ReportedWorkersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ReportedWorkerCondition
+  ): ReportedWorkersConnection!
+}
+
+"""A connection to a list of `ReportedWorker` values."""
+type ReportedWorkersConnection {
+  """A list of `ReportedWorker` objects."""
+  nodes: [ReportedWorker!]!
+
+  """
+  A list of edges which contains the `ReportedWorker` and cursor to aid in pagination.
+  """
+  edges: [ReportedWorkersEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `ReportedWorker` you could get from the connection."""
+  totalCount: Int!
+}
+
+type ReportedWorker implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  reportedWorkersId: UUID!
+  workerId: UUID!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  projectWorkerReportId: UUID!
+
+  """
+  Reads a single `ProjectWorkerReport` that is related to this `ReportedWorker`.
+  """
+  projectWorkerReport: ProjectWorkerReport
+}
+
+"""A `ReportedWorker` edge in the connection."""
+type ReportedWorkersEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ReportedWorker` at the end of the edge."""
+  node: ReportedWorker!
+}
+
+"""Methods to use when ordering `ReportedWorker`."""
+enum ReportedWorkersOrderBy {
+  NATURAL
+  REPORTED_WORKERS_ID_ASC
+  REPORTED_WORKERS_ID_DESC
+  WORKER_ID_ASC
+  WORKER_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  PROJECT_WORKER_REPORT_ID_ASC
+  PROJECT_WORKER_REPORT_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ReportedWorker` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input ReportedWorkerCondition {
+  """Checks for equality with the object’s `reportedWorkersId` field."""
+  reportedWorkersId: UUID
+
+  """Checks for equality with the object’s `workerId` field."""
+  workerId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `projectWorkerReportId` field."""
+  projectWorkerReportId: UUID
+}
+
+type ProjectCommonReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  projectCommonReportId: UUID!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  projectReportId: UUID!
+  title: String
+  reportText: String
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProjectCommonReport`.
+  """
+  projectReport: ProjectReport
+}
+
+type ProjectMeetingReport implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  projectMeetingReportId: UUID!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  projectReportId: UUID!
+  title: String
+  reportText: String
+
+  """
+  Reads a single `ProjectReport` that is related to this `ProjectMeetingReport`.
+  """
+  projectReport: ProjectReport
+}
+
+"""A `FormAttachedFile` edge in the connection."""
+type FormAttachedFilesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `FormAttachedFile` at the end of the edge."""
+  node: FormAttachedFile!
+}
+
+"""A connection to a list of `ProgressCheckReport` values."""
+type ProgressCheckReportsConnection {
+  """A list of `ProgressCheckReport` objects."""
+  nodes: [ProgressCheckReport!]!
+
+  """
+  A list of edges which contains the `ProgressCheckReport` and cursor to aid in pagination.
+  """
+  edges: [ProgressCheckReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProgressCheckReport` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProgressCheckReport` edge in the connection."""
+type ProgressCheckReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProgressCheckReport` at the end of the edge."""
+  node: ProgressCheckReport!
+}
+
+"""Methods to use when ordering `ProgressCheckReport`."""
+enum ProgressCheckReportsOrderBy {
+  NATURAL
+  PROGRESS_CHECK_REPORT_ID_ASC
+  PROGRESS_CHECK_REPORT_ID_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  EXECUTION_BUDGET_UNIT_ID_ASC
+  EXECUTION_BUDGET_UNIT_ID_DESC
+  PROGRESS_REPORT_DATA_ASC
+  PROGRESS_REPORT_DATA_DESC
+  TOTAL_PERFORMANCE_PERCENTAGE_ASC
+  TOTAL_PERFORMANCE_PERCENTAGE_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  CONSUMED_WORKERS_PERCENTAGE_ASC
+  CONSUMED_WORKERS_PERCENTAGE_DESC
+  TITLE_ASC
+  TITLE_DESC
+  REPORT_TEXT_ASC
+  REPORT_TEXT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProgressCheckReport` object types. All fields
+are tested for equality and combined with a logical ‘and.’
+"""
+input ProgressCheckReportCondition {
+  """Checks for equality with the object’s `progressCheckReportId` field."""
+  progressCheckReportId: UUID
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `executionBudgetUnitId` field."""
+  executionBudgetUnitId: UUID
+
+  """Checks for equality with the object’s `progressReportData` field."""
+  progressReportData: JSON
+
+  """
+  Checks for equality with the object’s `totalPerformancePercentage` field.
+  """
+  totalPerformancePercentage: BigFloat
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """
+  Checks for equality with the object’s `consumedWorkersPercentage` field.
+  """
+  consumedWorkersPercentage: BigFloat
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `reportText` field."""
+  reportText: String
+}
+
+"""A connection to a list of `ProjectBudgetChange` values."""
+type ProjectBudgetChangesConnection {
+  """A list of `ProjectBudgetChange` objects."""
+  nodes: [ProjectBudgetChange!]!
+
+  """
+  A list of edges which contains the `ProjectBudgetChange` and cursor to aid in pagination.
+  """
+  edges: [ProjectBudgetChangesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProjectBudgetChange` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProjectBudgetChange` edge in the connection."""
+type ProjectBudgetChangesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectBudgetChange` at the end of the edge."""
+  node: ProjectBudgetChange!
+}
+
+"""Methods to use when ordering `ProjectBudgetChange`."""
+enum ProjectBudgetChangesOrderBy {
+  NATURAL
+  PROJECT_BUDGET_ID_ASC
+  PROJECT_BUDGET_ID_DESC
+  CHANGE_REASON_CODE_ASC
+  CHANGE_REASON_CODE_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  BILLING_CLIENT_ID_ASC
+  BILLING_CLIENT_ID_DESC
+  TITLE_ASC
+  TITLE_DESC
+  REPORT_TEXT_ASC
+  REPORT_TEXT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectBudgetChange` object types. All fields
+are tested for equality and combined with a logical ‘and.’
+"""
+input ProjectBudgetChangeCondition {
+  """Checks for equality with the object’s `projectBudgetId` field."""
+  projectBudgetId: UUID
+
+  """Checks for equality with the object’s `changeReasonCode` field."""
+  changeReasonCode: String
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `billingClientId` field."""
+  billingClientId: UUID
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `reportText` field."""
+  reportText: String
+}
+
+"""A connection to a list of `ProjectCloseReport` values."""
+type ProjectCloseReportsConnection {
+  """A list of `ProjectCloseReport` objects."""
+  nodes: [ProjectCloseReport!]!
+
+  """
+  A list of edges which contains the `ProjectCloseReport` and cursor to aid in pagination.
+  """
+  edges: [ProjectCloseReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProjectCloseReport` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProjectCloseReport` edge in the connection."""
+type ProjectCloseReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectCloseReport` at the end of the edge."""
+  node: ProjectCloseReport!
+}
+
+"""Methods to use when ordering `ProjectCloseReport`."""
+enum ProjectCloseReportsOrderBy {
+  NATURAL
+  PROJECT_CLOSE_REPORT_ID_ASC
+  PROJECT_CLOSE_REPORT_ID_DESC
+  CLOSE_REPORT_CHECKLIST_ASC
+  CLOSE_REPORT_CHECKLIST_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectCloseReport` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input ProjectCloseReportCondition {
+  """Checks for equality with the object’s `projectCloseReportId` field."""
+  projectCloseReportId: UUID
+
+  """Checks for equality with the object’s `closeReportChecklist` field."""
+  closeReportChecklist: JSON
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+}
+
+"""A connection to a list of `ProjectCommonReport` values."""
+type ProjectCommonReportsConnection {
+  """A list of `ProjectCommonReport` objects."""
+  nodes: [ProjectCommonReport!]!
+
+  """
+  A list of edges which contains the `ProjectCommonReport` and cursor to aid in pagination.
+  """
+  edges: [ProjectCommonReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProjectCommonReport` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProjectCommonReport` edge in the connection."""
+type ProjectCommonReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectCommonReport` at the end of the edge."""
+  node: ProjectCommonReport!
+}
+
+"""Methods to use when ordering `ProjectCommonReport`."""
+enum ProjectCommonReportsOrderBy {
+  NATURAL
+  PROJECT_COMMON_REPORT_ID_ASC
+  PROJECT_COMMON_REPORT_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  TITLE_ASC
+  TITLE_DESC
+  REPORT_TEXT_ASC
+  REPORT_TEXT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectCommonReport` object types. All fields
+are tested for equality and combined with a logical ‘and.’
+"""
+input ProjectCommonReportCondition {
+  """Checks for equality with the object’s `projectCommonReportId` field."""
+  projectCommonReportId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `reportText` field."""
+  reportText: String
+}
+
+"""A connection to a list of `ProjectMeetingReport` values."""
+type ProjectMeetingReportsConnection {
+  """A list of `ProjectMeetingReport` objects."""
+  nodes: [ProjectMeetingReport!]!
+
+  """
+  A list of edges which contains the `ProjectMeetingReport` and cursor to aid in pagination.
+  """
+  edges: [ProjectMeetingReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProjectMeetingReport` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProjectMeetingReport` edge in the connection."""
+type ProjectMeetingReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectMeetingReport` at the end of the edge."""
+  node: ProjectMeetingReport!
+}
+
+"""Methods to use when ordering `ProjectMeetingReport`."""
+enum ProjectMeetingReportsOrderBy {
+  NATURAL
+  PROJECT_MEETING_REPORT_ID_ASC
+  PROJECT_MEETING_REPORT_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  TITLE_ASC
+  TITLE_DESC
+  REPORT_TEXT_ASC
+  REPORT_TEXT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectMeetingReport` object types. All fields
+are tested for equality and combined with a logical ‘and.’
+"""
+input ProjectMeetingReportCondition {
+  """Checks for equality with the object’s `projectMeetingReportId` field."""
+  projectMeetingReportId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `reportText` field."""
+  reportText: String
+}
+
+"""A connection to a list of `ProjectReport` values."""
+type ProjectReportsConnection {
+  """A list of `ProjectReport` objects."""
+  nodes: [ProjectReport!]!
+
+  """
+  A list of edges which contains the `ProjectReport` and cursor to aid in pagination.
+  """
+  edges: [ProjectReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `ProjectReport` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `ProjectReport` edge in the connection."""
+type ProjectReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectReport` at the end of the edge."""
+  node: ProjectReport!
+}
+
+"""Methods to use when ordering `ProjectReport`."""
+enum ProjectReportsOrderBy {
+  NATURAL
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  CREATE_USER_ID_ASC
+  CREATE_USER_ID_DESC
+  REPORT_DATE_ASC
+  REPORT_DATE_DESC
+  PROJECT_ID_ASC
+  PROJECT_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectReport` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input ProjectReportCondition {
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `createUserId` field."""
+  createUserId: UUID
+
+  """Checks for equality with the object’s `reportDate` field."""
+  reportDate: Date
+
+  """Checks for equality with the object’s `projectId` field."""
+  projectId: UUID
+}
+
+"""A connection to a list of `ProjectStatusUpdateReport` values."""
+type ProjectStatusUpdateReportsConnection {
+  """A list of `ProjectStatusUpdateReport` objects."""
+  nodes: [ProjectStatusUpdateReport!]!
+
+  """
+  A list of edges which contains the `ProjectStatusUpdateReport` and cursor to aid in pagination.
+  """
+  edges: [ProjectStatusUpdateReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProjectStatusUpdateReport` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProjectStatusUpdateReport` edge in the connection."""
+type ProjectStatusUpdateReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectStatusUpdateReport` at the end of the edge."""
+  node: ProjectStatusUpdateReport!
+}
+
+"""Methods to use when ordering `ProjectStatusUpdateReport`."""
+enum ProjectStatusUpdateReportsOrderBy {
+  NATURAL
+  PROJECT_STATUS_UPDATE_REPORT_ID_ASC
+  PROJECT_STATUS_UPDATE_REPORT_ID_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  CREATE_USER_ID_ASC
+  CREATE_USER_ID_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  PROJECT_STATUS_ID_ASC
+  PROJECT_STATUS_ID_DESC
+  TITLE_ASC
+  TITLE_DESC
+  REPORT_TEXT_ASC
+  REPORT_TEXT_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectStatusUpdateReport` object types. All
+fields are tested for equality and combined with a logical ‘and.’
+"""
+input ProjectStatusUpdateReportCondition {
+  """
+  Checks for equality with the object’s `projectStatusUpdateReportId` field.
+  """
+  projectStatusUpdateReportId: UUID
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `createUserId` field."""
+  createUserId: UUID
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
+
+  """Checks for equality with the object’s `projectStatusId` field."""
+  projectStatusId: UUID
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `reportText` field."""
+  reportText: String
+}
+
+"""A connection to a list of `ProjectWorkerReport` values."""
+type ProjectWorkerReportsConnection {
+  """A list of `ProjectWorkerReport` objects."""
+  nodes: [ProjectWorkerReport!]!
+
+  """
+  A list of edges which contains the `ProjectWorkerReport` and cursor to aid in pagination.
+  """
+  edges: [ProjectWorkerReportsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ProjectWorkerReport` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `ProjectWorkerReport` edge in the connection."""
+type ProjectWorkerReportsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ProjectWorkerReport` at the end of the edge."""
+  node: ProjectWorkerReport!
+}
+
+"""Methods to use when ordering `ProjectWorkerReport`."""
+enum ProjectWorkerReportsOrderBy {
+  NATURAL
+  PROJECT_WORKER_REPORT_ID_ASC
+  PROJECT_WORKER_REPORT_ID_DESC
+  REPORT_TYPE_CODE_ASC
+  REPORT_TYPE_CODE_DESC
+  TITLE_ASC
+  TITLE_DESC
+  REPORT_TEXT_ASC
+  REPORT_TEXT_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  UPDATED_AT_ASC
+  UPDATED_AT_DESC
+  PROJECT_REPORT_ID_ASC
+  PROJECT_REPORT_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ProjectWorkerReport` object types. All fields
+are tested for equality and combined with a logical ‘and.’
+"""
+input ProjectWorkerReportCondition {
+  """Checks for equality with the object’s `projectWorkerReportId` field."""
+  projectWorkerReportId: UUID
+
+  """Checks for equality with the object’s `reportTypeCode` field."""
+  reportTypeCode: String
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `reportText` field."""
+  reportText: String
+
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `updatedAt` field."""
+  updatedAt: Datetime
+
+  """Checks for equality with the object’s `projectReportId` field."""
+  projectReportId: UUID
 }
