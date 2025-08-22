@@ -2,6 +2,104 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Table Diary {
-  id String [pk]
+Table close_report {
+  close_report_id String [pk]
+  close_report_checklist Json [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  create_user_id String [not null]
+  project_report_id String [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
 }
+
+Table form_attached_files {
+  form_attached_file_id String [pk]
+  project_report_id String [not null]
+  file_name String [not null]
+  filapath String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  create_user_id String [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table form_tags {
+  project_report_id String [not null]
+  tag_code String
+  tag_id String [pk]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  create_user_id String [not null]
+
+  indexes {
+    (tag_code, project_report_id) [unique]
+  }
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table progress_report {
+  progress_report_id String [pk]
+  project_report_id String [not null]
+  execution_budget_unit_id String [not null]
+  progress_report_data Json [not null]
+  total_performance_percentage Decimal [not null, default: 0]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  create_user_id String [not null]
+
+  indexes {
+    (project_report_id, execution_budget_unit_id) [unique]
+  }
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table project_report {
+  project_report_id String [pk]
+  title String
+  report_text String
+  created_at DateTime [not null]
+  updated_at DateTime [not null]
+  create_user_id String [not null]
+  report_date DateTime [default: `now()`]
+  project_id String [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table project_status_update_report {
+  project_status_update_report_id String [pk]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  create_user_id String [not null]
+  project_report_id String [not null]
+  project_status_id String [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table reported_workers {
+  reported_workers_id String [pk]
+  project_report_id String [not null]
+  worker_id String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  create_user_id String [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Ref: close_report.project_report_id > project_report.project_report_id [delete: Cascade]
+
+Ref: form_attached_files.project_report_id > project_report.project_report_id [delete: Cascade]
+
+Ref: form_tags.project_report_id > project_report.project_report_id [delete: Cascade]
+
+Ref: progress_report.project_report_id > project_report.project_report_id [delete: Cascade]
+
+Ref: project_status_update_report.project_report_id > project_report.project_report_id [delete: Cascade]
+
+Ref: reported_workers.project_report_id > project_report.project_report_id [delete: Cascade]
